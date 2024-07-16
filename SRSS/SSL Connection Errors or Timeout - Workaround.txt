@@ -1,0 +1,5 @@
+Workaround: Unfortunately there is no easy workaround for this other than to not use SSL enabled report server instances. However there is a configuration setting that can be tweaked to get around this problem but it is not recommended to tweak this setting if the report server instance is hosting other reports (not specific to Configuration Manager).
+
+Open the rsreportserver.config file using notepad. The default location for the default instance is under [SystemDrive] > Program Files > Microsoft SQL Server > MSRSXX.MSSQLSERVER > Reporting Services > ReportServer. Search for the property “SecureConnectionLevel”. Change this value to 0 and save the rsreportserver.config file.
+
+Modify the line that begins with <Add key=”SecureConnectionLevel” Value=”2”/> to <Add key=”SecureConnectionLevel” Value=”0”/>

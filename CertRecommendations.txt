@@ -1,0 +1,8 @@
+SHA256
+Subject:
+CN=%localhost%
+AltSubject:
+DNS=FQDN
+
+Reference Learn Document for PKI Certificates and CM recommendation:
+https://learn.microsoft.com/en-us/mem/configmgr/core/plan-design/network/example-deployment-of-pki-certificates

@@ -1,0 +1,15 @@
+Open SQL Server Reporting Services Configuration Manager
+
+Click on Web Service URL menu and make sure that the URL's match the ones located in Web Portal URL menu.
+
+If they're different, open the rsreportserver.config file (C:\Program Files\Microsoft SQL Server Reporting Services\SSRS\ReportServer) and remove any entries not listed in Web Service URL.
+
+Open your web portal ie. http://localhost/Reports and see if it's resolved. If so, all done.
+
+If not, click the Encryption Keys menu, in the "Delete Encrypted Content" section, click "Delete".
+
+Open your web portal again and see if it's resolved.
+
+Locate and update your datasource credentials.
+
+-Matthew

@@ -1,0 +1,27 @@
+
+Open MMC + Local Host Certificate Store. Request a new certificate, select SCCM Web Server (SHA256).
+Requires Pri-CN and Alt-DNS to be the hosts FQDN!!!! I would recommend adding a Alt-IP.
+
+After creating it, edit the Private Key permissions and add the SQL and SRSS Service accounts full permissions. Don't trust allowing just the Built-in Admins group.
+
+Open edit and navigate to HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQLXX.MSSQLSERVER\MSSQLServer\SuperSocketNetLib
+Edit the Certificate DWORD to blank (""), this forces SQL to use the next available PFX file that it can use.
+
+Open "Report Server Config Tool" > Connect > Web Service URL > Advanced > Remove 443 > Add 443 with new Cert.
+Press OK, then Apply at the bottom, it takes a while. If the cert is invalid or you're having host issues, try restarting the host and checking the cert again before attempting to bind again.
+Binding can take 5-10 minutes.
+
+Backup/Remove any certificates that are old. Failure to do so could force SQL to use an old cert.
+
+RegKey Example: (Replace XX with the SQL version you're using)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQLXX.MSSQLSERVER\MSSQLServer\SuperSocketNetLib]
+"ForceEncryption"=dword:00000000
+"HideInstance"=dword:00000000
+"Certificate"=""
+"ExtendedProtection"=dword:00000000
+"AcceptedSPNs"=hex(7):00,00
+"DisplayName"="SQL Server Network Configuration"
+
+Restart MSSQLServer Service. Sometimes a reboot works best as there are a number of proccesses that rely on MSSQLServer.
+
+-Matthew
